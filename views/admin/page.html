@@ -1,0 +1,15 @@
+<nav aria-label="Page navigation">
+    <ul class="pager">
+        <li class="previous {% if page==1 %} disabled {% endif %}">
+            <a href="{% if page==1 %} javascript:;  {% else %} {{ url }}?page={{  page-1 }} {% endif %}">
+                <span aria-hidden="true">&larr;</span> 前一页
+            </a>
+        </li>
+        <span style="line-height: 32px">------共有 {{ maxPage }} 页，当前是第 {{ page }} 页------</span>
+        <li class="next {% if maxPage==0||page==maxPage %} disabled {% endif %}">
+            <a href="{% if maxPage==0||page==maxPage %} javascript:;  {% else %} {{ url }}?page={{  page+1 }} {% endif %}">后一页
+                <span aria-hidden="true">&rarr;</span>
+            </a>
+        </li>
+    </ul>
+</nav>

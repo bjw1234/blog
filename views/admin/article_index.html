@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+{% block main %}
+<ol class="breadcrumb">
+    <li><a href="/admin">后台管理</a></li>
+    <li class="active">管理首页</li>
+</ol>
+
+<table class="table table-hover table-striped table-bordered">
+    <tr style="font-weight: bold">
+        <td>文章ID</td>
+        <td>文章分类</td>
+        <td>文章标题</td>
+        <td>作者</td>
+        <td>添加时间</td>
+        <td>阅读量</td>
+        <td>操作</td>
+    </tr>
+    {% for article in articles %}
+    <tr>
+        <td>{{ article._id.toString() }}</td>
+        <td>{{ article.category.category_name }}</td>
+        <td>{{ article.title }}</td>
+        <td>{{ article.user.username }}</td>
+        <td>{{ article.addTime | date('Y-m-d h:i:s',-60*8)}}</td>
+        <td>{{ article.views }}</td>
+        <td>
+            <a href="/admin/article/edit?id={{ article._id.toString() }}">编辑</a> |
+            <a href="/admin/article/delete?id={{ article._id.toString() }}">删除</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<!--分页-->
+{% include 'page.html' %}
+{% endblock %}

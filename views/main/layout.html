@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" type="text/css" href="/public/css/main.css">
+
+    <!--语法高亮 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/googlecode.min.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="/public/js/layer-v3.1.1/layer/layer.js"></script>
+    <script type="text/javascript" src="/public/js/main.js"></script>
+</head>
+<body>
+<!--页头开始-->
+<header>
+    {% if !data.userInfo._id %}
+    <div class="bar">
+        <div class="login">登录</div>
+        <div class="register">注册</div>
+    </div>
+    {% else %}
+    <div class="userInfo">
+        {% if data.head %}
+        <img class="head" alt="头像" src="{{ data.head }}">
+        {% else %}
+        <img class="head" alt="头像" src="/public/img/head.jpg">
+        {% endif %}
+        <span class="text">您好,
+                            {% if data.userInfo.isAdmin %}
+                            <span style="color:orange">管理员</span><a class="admin" href="/admin">进入后台</a>
+                            {% else %}
+                            <span style="color: orange">{{ data.userInfo.username }}</span>
+                            {% endif %}
+                            <span class="logout">退出</span>
+                        </span>
+    </div>
+    {% endif %}
+</header>
+<!--页头结束-->
+
+<!--banner和nav开始-->
+<section class="content">
+    <div class="banner">
+        <img class="banner-img" src="/public/img/banner_run.jpg" alt="">
+    </div>
+    <div class=" nav">
+        <li class="{% if !data.category %} active {% endif %}">
+            <a href="/">首页</a>
+        </li>
+        {% for cate in data.categories %}
+        <li class="{% if cate._id.toString() === data.category %} active {% endif %}">
+            <a href="/?category={{ cate._id.toString() }}">{{ cate.category_name }}</a>
+        </li>
+        {% endfor %}
+    </div>
+</section>
+<!--banner和nav结束-->
+
+<!--博文页开始-->
+<section class="article">
+    {% if data.articles.length ===0 %}
+    <div class="article-none">
+        <img src="/public/img/cry.png" alt="">
+        <h1>当前分类下没有文章!</h1>
+    </div>
+    {% endif %}
+    {% block main %}
+
+    {% endblock %}
+
+    <!--右侧信息列表-->
+    {% if data.article || data.articles.length != 0%}
+    <div class="area-message">
+        {% if data.userInfo._id %}
+        <div class="user-info">
+            <p class="right-title">用户信息：</p>
+            <p class="hr-2px"></p>
+            <p class="username">用户名：<span>{{ data.userInfo.username }}</span></p>
+            <p class="welcome">欢迎来到我的博客！</p>
+        </div>
+        {% endif %}
+        <div class="friend-link">
+            <p class="right-title">我的社区：</p>
+            <p class="hr-2px"></p>
+            <p class="link"><a href="/">imooc慕课学习网</a></p>
+            <p class="link"><a href="/">GitHub官方网站</a></p>
+        </div>
+    </div>
+    {% endif %}
+</section>
+<!--博文页结束-->
+
+<!--分页开始-->
+<nav class="Page navigation">
+    {% if data.articles.length != 0 %}
+    <div class="pager">
+        <li class="previous {% if data.page==1 %} disabled {% endif %}">
+            <a href="{% if data.page==1 %} javascript:;  {% else %} {{ data.url }}?category={{data.category}}&page={{  data.page-1 }} {% endif %}">
+                <span aria-hidden="true">&larr;</span> 前一页
+            </a>
+        </li>
+        <span class="page-text">------共有 {{ data.maxPage }} 页，当前是第 {{ data.page }} 页------</span>
+        <li class="next {% if data.maxPage==0||data.page==data.maxPage %} disabled {% endif %}">
+            <a href="{% if data.maxPage==0||data.page==data.maxPage %} javascript:;  {% else %} {{ data.url }}?category={{data.category}}&page={{  data.page+1 }} {% endif %}">后一页
+                <span aria-hidden="true">&rarr;</span>
+            </a>
+        </li>
+    </div>
+    {% endif %}
+
+</nav>
+<!--分页结束-->
+<br><br><br>
+
+<!--页脚开始-->
+<footer>
+    <p class="author">&copy;佐佐木Q</p>
+    <p class="time">2018-03-08 10:56</p>
+</footer>
+<!--页脚结束-->
+</body>
+
+<!--登录弹出层-->
+<div class="login-dialog dialog">
+    <div class="wrapper">
+        <div class="username-wrapper">
+            <input class="username" name="username" type="text" placeholder="用户名">
+        </div>
+        <div class="password-wrapper">
+            <input class="password" name="password" type="password" placeholder="密码"><span class="eye eye_show"></span>
+        </div>
+        <div class="submit">登 录</div>
+    </div>
+</div>
+
+<!--注册弹出层-->
+<div class="register-dialog dialog">
+    <div class="wrapper">
+        <div class="username-wrapper">
+            <input class="username" name="username" type="text" placeholder="用户名">
+        </div>
+        <div class="password-wrapper">
+            <input class="password" name="password" type="password" placeholder="密码"><span class="eye eye_show"></span>
+        </div>
+        <div class="password-wrapper">
+            <input class="password" name="repeat" type="password" placeholder="确认密码"><span class="eye eye_show"></span>
+        </div>
+        <div class="submit">注 册</div>
+    </div>
+</div>
+</html>

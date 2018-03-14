@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+{% block main %}
+<ol class="breadcrumb">
+    <li><a href="/admin">后台管理</a></li>
+    <li class="active">信息提示</li>
+</ol>
+
+<form class="col-lg-6" method="post">
+    <div class="form-group">
+        <label for="name">请输入您要修改的名称：</label>
+        <input name="category_name" value="{{ category }}" type="text" class="form-control" id="name" placeholder="分类名称">
+    </div>
+    <button type="submit" class="btn btn-default">提交</button>
+</form>
+{% endblock %}

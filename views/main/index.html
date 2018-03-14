@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+{% block main %}
+<!--文章列表-->
+<div class="article-item-wrapper">
+    {% for article in data.articles %}
+    <div class="article-item">
+        <h2 class="title">{{ article.title }}</h2>
+        <div class="info">
+            作者：<span class="info-item author">{{ article.user.username }}</span>&nbsp;-
+            时间：<span class="info-item time">{{ article.addTime | date('y-m-d h:i',-60*8)}}</span>&nbsp;-
+            阅读量：<span class="info-item views">{{ article.views }}</span>&nbsp;-
+            评论：<span class="info-item comment">{{ article.comments.length }}</span>
+        </div>
+        <p class="description">{{ article.description }}</p>
+        <a class="btn-read-all" href="/views?article_id={{ article._id.toString() }}">阅读全文</a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
+

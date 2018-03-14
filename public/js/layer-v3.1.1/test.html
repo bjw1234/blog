@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>index</title>	
+  <meta charset="utf-8">
+</head>
+<body>
+	<div class="box">
+		虽然通过select事件，我们可以知道用户什么时候选择了文本，但仍然不知道用户选择了什么文本。HTML5通过一些扩展方案解决了这个问题，以便更顺利的取得选择的文本。该规范采取的方式是添加两个属性：selectionStart和selectionEnd。这两个属性中保存的是基于0的数值，表示所选择文本的范围（即文本选区开头和结尾的偏移量）。因此，要取得用户在文本框中选择的文本，可以采用以下代码。
+	</div>
+
+	<button id="btn">点击</button>
+
+	<script type="text/javascript">
+		var btn = document.getElementById('btn');
+		var textbox = document.querySelector('.box');
+		btn.onclick = function () {
+			getSelectedText(textbox);
+		}
+
+		function getSelectedText(textbox) {
+			return textbox.value.substring(textbox.selectionStart,textbox.selectionEnd);
+        }
+	</script>
+</body>
+</html>

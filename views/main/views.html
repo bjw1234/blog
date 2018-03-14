@@ -1,0 +1,109 @@
+{% extends 'layout.html' %}
+{% block main %}
+<script type="text/javascript" src="/public/js/comment.js"></script>
+{% if data.article %}
+<!--文章主体内容    -->
+<div class="article-detail-box">
+    <h2 class="title">{{ data.article.title }}</h2>
+    <div class="info">
+        作者：<span class="info-item author">{{ data.article.user.username }}</span>&nbsp;-
+        时间：<span class="info-item time">{{ data.article.addTime | date('y-m-d h:i',-60*8)}}</span>&nbsp;-
+        阅读量：<span class="info-item views">{{ data.article.views }}</span>&nbsp;-
+        评论：<span class="info-item comment" id="info-comments-count">{{ data.article.comments.length }}</span>
+    </div>
+    <div id="article-content" class="content">
+        {% autoescape false %}
+        {{ data.article_content_html }}
+        {% endautoescape %}
+    </div>
+</div>
+
+<!--文章评论-->
+<div class="article-comment">
+    <div class="top">
+        <span class="comment-title">评论</span>
+        <span class="comment-count">一共有<span id="count">0</span>条评论</span>
+    </div>
+    <input class="hidden" type="text" id="article_id" value="{{ data.article._id.toString() }}">
+    {% if data.userInfo._id %}
+    <p class="username">{{ data.userInfo.username }}</p>
+    <input type="text" class="comment-input">
+    <button class="comment-push">提 交</button>
+    {% else %}
+    <h3 class="no-login">只有登录用户才能评论哟！</h3>
+    {% endif %}
+
+    <!--评论列表-->
+    <div class="comment-list">
+        <div class="comment-item">
+            <img class="comment-head" src="{{ data.head }}" alt="">
+            <div class="item-top">
+                <span class="username">白家伟</span>
+                <span class="time">2017-3-11 23::50</span>
+            </div>
+            <p class="comment-content">今天晚上把头像弄好。</p>
+        </div>
+    </div>
+</div>
+<!--分页开始-->
+<nav class="Page navigation">
+    <div class="pager">
+        <li class="previous">
+            <!--<a href="{% if data.page==1 %} javascript:;  {% else %}/views?article_id={{ data.article._id.toString() }}&page={{  data.page-1 }} {% endif %}">-->
+            <a href="javascript:;" id="comment-previous"><span aria-hidden="true">&larr;</span>前一页</a>
+        </li>
+        <span class="page-text">------共有 <sapn id="page-count">1</sapn> 页，当前是第 <span
+                id="page-current">1</span> 页------</span>
+        <li class="next">
+            <!--<a href="{% if data.maxPage==0||data.page==data.maxPage %} javascript:;  {% else %}/views?article_id={{ data.article._id.toString() }}&page={{  data.page+1 }} {% endif %}">后一页-->
+            <a href="javascript:;" id="comment-next"><span aria-hidden="true">&rarr;</span>后一页</a>
+        </li>
+    </div>
+</nav>
+<!--分页结束-->
+{% else %}
+<div class="article-none">
+    <img src="/public/img/cry.png" alt="">
+    <h1>404 Not Found!</h1>
+</div>
+{% endif %}
+
+<!--<script type="text/javascript">-->
+<!--window.onload = function () {-->
+
+<!--// 记录一下当前scrollTop的值-->
+<!--window.onscroll = function () {-->
+<!--var t = document.documentElement.scrollTop || document.body.scrollTop;-->
+<!--// 设置cookie-->
+<!--SetCookie('top', t);-->
+<!--};-->
+
+<!--// 设置页面位置-->
+<!--if (getCookie('top')) {-->
+<!--document.documentElement.scrollTop = getCookie('top');-->
+<!--}-->
+
+<!--function SetCookie(name, value) {-->
+<!--var Days = 30 * 12;  //cookie 将被保存一年-->
+<!--var exp = new Date(); //获得当前时间-->
+<!--exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000); //换成毫秒-->
+<!--document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();-->
+<!--}-->
+
+<!--function getCookie(name) {-->
+<!--var arr = document.cookie.match(new RegExp("(^| )" + name + "=([^;]*)(;|$)"));-->
+<!--if (arr != null) {-->
+<!--return unescape(arr[2]);-->
+<!--} else {-->
+<!--return null;-->
+<!--}-->
+<!--}-->
+
+<!--};-->
+<!--</script>-->
+
+
+{% endblock %}
+
+
+

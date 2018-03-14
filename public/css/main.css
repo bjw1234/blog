@@ -1,0 +1,542 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: #F2F2F2;
+}
+
+a {
+    text-decoration: none;
+}
+
+.content .nav li {
+    list-style: none;
+}
+
+.hidden {
+    display: none;
+}
+
+header {
+    position: fixed;
+    width: 100%;
+    height: 40px;
+    background: #222;
+    z-index: 2;
+}
+
+header .bar {
+    float: right;
+    display: inline-block;
+    margin-right: 40px;
+}
+
+header .bar .login, header .bar .register {
+    color: #fff;
+    padding: 0 5px;
+    font-size: 14px;
+    line-height: 40px;
+    display: inline-block;
+    font-family: "微软雅黑";
+    cursor: pointer;
+}
+
+header .bar .login:hover, header .bar .register:hover {
+    color: orange;
+}
+
+header .userInfo {
+    float: right;
+    height: 100%;
+    font-size: 0;
+}
+
+header .userInfo .head {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-top: 5px;
+    margin-right: 10px;
+}
+
+header .userInfo .text {
+    position: relative;
+    top: -8px;
+    font-size: 14px;
+    color: #fff;
+    margin-right: 50px;
+}
+
+header .userInfo .text .logout {
+    margin-left: 20px;
+    cursor: pointer;
+    color: #fff;
+}
+
+header .userInfo .text .logout:hover {
+    text-decoration: underline;
+    color: darkred;
+}
+
+header .userInfo .text .admin {
+    margin-left: 10px;
+    color: #4db860;
+}
+
+.content .banner {
+    font-size: 0;
+}
+
+.content .banner .banner-img {
+    width: 100%;
+}
+
+.content .nav {
+    height: 40px;
+    text-align: center;
+    background-color: #fff;
+}
+
+.content .nav li {
+    display: inline-block;
+}
+
+.content .nav li:hover {
+    border-bottom: 2px solid #1694ff;
+}
+
+.content .nav li.active {
+    border-bottom: 2px solid #1694ff;
+}
+
+.content .nav li:hover a {
+    color: #1E9FFF;
+}
+
+.content .nav li a {
+    display: inline-block;
+    padding: 0 25px;
+    height: 100%;
+    line-height: 40px;
+}
+
+/*弹出层样式*/
+.dialog {
+    display: none;
+    width: 400px;
+}
+
+.dialog .wrapper {
+    margin: 30px 50px;
+}
+
+.dialog .username-wrapper, .dialog .password-wrapper {
+    text-align: center;
+}
+
+.dialog .username, .dialog .password {
+    width: 100%;
+    height: 35px;
+    background: none;
+    outline: none;
+    margin: 10px 0;
+    padding-left: 20px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    color: #222;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.dialog .username:focus, .dialog .password:focus {
+    border: 1px solid dodgerblue;
+}
+
+.dialog .submit {
+    background: #009e95;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    color: #dfff;
+    margin-top: 30px;
+    cursor: pointer;
+}
+
+.dialog .submit:hover {
+    background: #20c2b9;
+}
+
+.dialog .eye {
+    position: absolute;
+    width: 32px;
+    height: 16px;
+    margin-top: 23px;
+    margin-left: -37px;
+    cursor: pointer;
+}
+
+.dialog .eye_show {
+    background: url(/public/img/eye_show.png) left top no-repeat;
+    background-size: 24px 12px;
+}
+
+.dialog .eye_hidden {
+    background: url(/public/img/eye_hidden.png) left top no-repeat;
+    background-size: 24px 15px;
+}
+
+/*博文页样式*/
+.article {
+    min-height: 320px;
+    position: relative;
+    overflow: hidden;
+    margin-top: 40px;
+}
+
+.article .area-message {
+    width: 20%;
+    position: absolute;
+    right: 8%;
+    top: 0;
+}
+
+.article .user-info {
+    background-color: #fff;
+    box-sizing: border-box;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.article .right-title {
+    display: inline-block;
+    padding-bottom: 3px;
+    border-bottom: 2px solid orange;
+    position: relative;
+    z-index: 1;
+}
+
+.article .hr-2px {
+    height: 2px;
+    background: #F6F6F6;
+    position: relative;
+    top: -2px;
+    z-index: 0;
+}
+
+.article .user-info .username {
+    margin-top: 20px;
+}
+
+.article .user-info .username span {
+    color: orange;
+}
+
+.article .user-info .welcome {
+    margin: 15px 0;
+}
+
+.article .friend-link {
+    padding: 10px 10px 20px;
+    background-color: #fff;
+}
+
+.article .friend-link .link {
+    margin: 15px 0;
+}
+
+.article-item {
+    width: 60%;
+    margin: 0 0 40px 10%;
+    background-color: #fff;
+
+}
+
+.article-item .title {
+    text-align: center;
+    padding: 40px 0;
+}
+
+.article-item .info {
+    padding: 0 20px;
+    text-align: center;
+}
+
+.article-item .info-item {
+    color: #2D93CA;
+}
+
+.article-item-wrapper .article-item .description {
+    display: -webkit-box;
+    overflow: hidden;
+    text-indent: 40px;
+    margin: 40px 30px;
+    line-height: 1.5;
+    text-overflow: ellipsis;
+    box-orient: vertical;
+    -moz-box-orient: vertical;
+    -webkit-box-orient: vertical;
+    line-clamp: 3;
+    -webkit-line-clamp: 3;
+}
+
+.article-item-wrapper .article-item .btn-read-all {
+    display: inline-block;
+    background: #167dff;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin: 15px 0 40px 30px;
+    cursor: pointer;
+}
+
+.article-item-wrapper .article-item .btn-read-all:hover {
+    background-color: #5f91ca;
+}
+
+/*导航样式列表*/
+.pager {
+    width: 60%;
+    height: 60px;
+    background: #fff;
+    margin-left: 10%;
+    text-align: center;
+    display: flex;
+}
+
+.pager li {
+    list-style: none;
+}
+
+.pager .previous, .pager .next {
+    flex: 1;
+    line-height: 60px;
+}
+
+.pager .page-text {
+    flex: 2;
+    line-height: 60px;
+}
+
+.pager .previous a, .pager .next a {
+    background: #0b73ff;
+    border-radius: 50px;
+    border: 1px solid;
+    color: #fff;
+    padding: 5px 15px;
+}
+
+.pager .previous a:hover, .pager .next a:hover {
+    background-color: #1fadff;
+}
+
+.pager .previous.disabled a {
+    display: none;
+}
+
+.pager .next.disabled a {
+    display: none;
+}
+
+/*没有文章*/
+.article-none {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.article-none h1 {
+    text-align: center;
+    margin-top: 30px;
+}
+
+/*页脚样式*/
+footer {
+    padding-top: 50px;
+    text-align: center;
+    height: 150px;
+    background-color: #2E2D3C;
+}
+
+footer .author {
+    color: #fff;
+}
+
+footer .time {
+    padding-top: 30px;
+    color: #fff;
+}
+
+/*文章详情页样式*/
+.article-detail-box {
+    width: 60%;
+    margin: 0 0 40px 10%;
+    background-color: #fff;
+    overflow: hidden;
+
+}
+
+.article-detail-box .title {
+    text-align: center;
+    padding: 40px 0;
+}
+
+.article-detail-box .info {
+    padding: 0 20px;
+    text-align: center;
+}
+
+.article-detail-box .info-item {
+    color: #2D93CA;
+}
+
+.article-detail-box .content {
+    margin: 40px 30px;
+    line-height: 1.5;
+}
+
+#bjw-previous {
+    border: 1px solid;
+    height: 415px;
+    border-radius: 5px;
+}
+
+/*对markdown样式的补充*/
+pre {
+    display: block;
+    padding: 9.5px;
+    margin: 0 0 10px;
+    font-size: 15px;
+    line-height: 1.42857143;
+    color: #333;
+    word-break: break-all;
+    word-wrap: break-word;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow: auto;
+}
+
+blockquote {
+    padding: 10px 20px;
+    margin: 0 0 20px;
+    font-size: 17.5px;
+    border-left: 5px solid #eee;
+}
+
+ul, ol {
+    padding-left: 40px;
+}
+
+#article-content h2 {
+    margin: 30px 0;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #61cc60;
+}
+
+/*文章评论样式*/
+.article-comment {
+    width: 60%;
+    background-color: #fff;
+    margin-top: 30px;
+    margin-left: 10%;
+    padding: 35px 25px 30px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+.article-comment .top {
+    overflow: hidden;
+}
+
+.article-comment .top .comment-title {
+    float: left;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.article-comment .top .comment-count {
+    float: right;
+}
+
+.article-comment .username {
+    margin: 20px 0;
+
+}
+
+.article-comment .comment-input {
+    height: 45px;
+    width: 80%;
+    padding-left: 20px;
+    font-size: 14px;
+}
+
+.article-comment .comment-push {
+    width: 100px;
+    height: 50px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    background-color: #1E9FFF;
+    cursor: pointer;
+    color: #fff;
+    font-size: 14px;
+}
+
+.article-comment .comment-push:hover {
+    background-color: #0e77ff;
+}
+
+.article-comment .comment-item {
+    position: relative;
+    margin: 20px 33px 15px 0;
+    border-bottom: 1px solid #cccccc;
+    padding-bottom: 20px;
+    padding-left: 50px;
+}
+
+.article-comment .comment-item .comment-head {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    margin-left: -50px;
+    border-radius: 50%;
+    background-color: #e9e3e3;
+}
+
+.article-comment .item-top {
+    overflow: hidden;
+
+}
+
+.article-comment .username {
+    font-weight: bold;
+}
+
+.article-comment .time {
+    float: right;
+}
+
+.article-comment .comment-content {
+    margin-top: 10px;
+    font-size: 13px;
+}
+
+.article-comment .no-login {
+    text-align: center;
+    color: #fff;
+    background-color: #2ab9ff;
+    line-height: 40px;
+    margin: 30px 33px 30px 0;
+}
+
+.no-page-comments {
+    border: none;
+    color: #222;
+    background-color: #fff;
+}
+
+
+
+
+
