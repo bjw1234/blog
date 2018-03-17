@@ -1,8 +1,8 @@
-## °²×°ÒÀÀµ
+## install
 npm install 
 
 
-## Æô¶¯
-node app.js
+## start
+node app.js 
 
 
