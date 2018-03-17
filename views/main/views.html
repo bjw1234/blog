@@ -35,14 +35,7 @@
 
     <!--评论列表-->
     <div class="comment-list">
-        <div class="comment-item">
-            <img class="comment-head" src="{{ data.head }}" alt="">
-            <div class="item-top">
-                <span class="username">白家伟</span>
-                <span class="time">2017-3-11 23::50</span>
-            </div>
-            <p class="comment-content">今天晚上把头像弄好。</p>
-        </div>
+
     </div>
 </div>
 <!--分页开始-->
@@ -52,8 +45,7 @@
             <!--<a href="{% if data.page==1 %} javascript:;  {% else %}/views?article_id={{ data.article._id.toString() }}&page={{  data.page-1 }} {% endif %}">-->
             <a href="javascript:;" id="comment-previous"><span aria-hidden="true">&larr;</span>前一页</a>
         </li>
-        <span class="page-text">------共有 <sapn id="page-count">1</sapn> 页，当前是第 <span
-                id="page-current">1</span> 页------</span>
+        <span class="page-text">  <span id="page-current">1</span> / <sapn id="page-count">1</sapn></span>
         <li class="next">
             <!--<a href="{% if data.maxPage==0||data.page==data.maxPage %} javascript:;  {% else %}/views?article_id={{ data.article._id.toString() }}&page={{  data.page+1 }} {% endif %}">后一页-->
             <a href="javascript:;" id="comment-next"><span aria-hidden="true">&rarr;</span>后一页</a>

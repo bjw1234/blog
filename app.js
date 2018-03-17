@@ -19,6 +19,7 @@ app.use((req, res, next) => {
     if (req.cookies.get("userInfo")) {
         try {
             req.userInfo = JSON.parse(req.cookies.get("userInfo"));
+            // 查询数据库判断是否为管理员
             User.findById(req.userInfo._id).then(function (result) {
                 req.userInfo.isAdmin = Boolean(result.isAdmin);
                 next();

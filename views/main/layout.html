@@ -2,9 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0,maximum-scale=1.0,minimum=1.0,user-scalable=no">
     <title>{{ title }}</title>
     <link rel="stylesheet" type="text/css" href="/public/css/main.css">
-
+    <link rel="stylesheet" type="text/css" href="/public/css/phoneStyl.css">
     <!--语法高亮 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/googlecode.min.css">
     <script src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -44,15 +46,17 @@
     <div class="banner">
         <img class="banner-img" src="/public/img/banner_run.jpg" alt="">
     </div>
-    <div class=" nav">
-        <li class="{% if !data.category %} active {% endif %}">
-            <a href="/">首页</a>
-        </li>
-        {% for cate in data.categories %}
-        <li class="{% if cate._id.toString() === data.category %} active {% endif %}">
-            <a href="/?category={{ cate._id.toString() }}">{{ cate.category_name }}</a>
-        </li>
-        {% endfor %}
+    <div class="nav-wrapper">
+        <div class=" nav">
+            <li class="{% if !data.category %} active {% endif %}">
+                <a href="/">首页</a>
+            </li>
+            {% for cate in data.categories %}
+            <li class="{% if cate._id.toString() === data.category %} active {% endif %}">
+                <a href="/?category={{ cate._id.toString() }}">{{ cate.category_name }}</a>
+            </li>
+            {% endfor %}
+        </div>
     </div>
 </section>
 <!--banner和nav结束-->
@@ -100,7 +104,7 @@
                 <span aria-hidden="true">&larr;</span> 前一页
             </a>
         </li>
-        <span class="page-text">------共有 {{ data.maxPage }} 页，当前是第 {{ data.page }} 页------</span>
+        <span class="page-text">{{ data.page }} / {{ data.maxPage }}</span>
         <li class="next {% if data.maxPage==0||data.page==data.maxPage %} disabled {% endif %}">
             <a href="{% if data.maxPage==0||data.page==data.maxPage %} javascript:;  {% else %} {{ data.url }}?category={{data.category}}&page={{  data.page+1 }} {% endif %}">后一页
                 <span aria-hidden="true">&rarr;</span>

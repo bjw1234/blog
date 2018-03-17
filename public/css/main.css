@@ -481,6 +481,7 @@ ul, ol {
     cursor: pointer;
     color: #fff;
     font-size: 14px;
+    margin-top: 5px;
 }
 
 .article-comment .comment-push:hover {
@@ -489,7 +490,7 @@ ul, ol {
 
 .article-comment .comment-item {
     position: relative;
-    margin: 20px 33px 15px 0;
+    margin: 20px;
     border-bottom: 1px solid #cccccc;
     padding-bottom: 20px;
     padding-left: 50px;
@@ -527,7 +528,7 @@ ul, ol {
     color: #fff;
     background-color: #2ab9ff;
     line-height: 40px;
-    margin: 30px 33px 30px 0;
+    margin: 30px 20px;
 }
 
 .no-page-comments {
