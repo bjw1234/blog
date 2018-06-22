@@ -100,7 +100,8 @@ function Base64() {
         }
         return string;
     }
-}function Base64() {
+}
+function Base64() {
 
     // private property
     _keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";

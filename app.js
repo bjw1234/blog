@@ -1,25 +1,25 @@
-const swig = require('swig'); // Ä£°å½âÎöÒýÇæ
-const express = require('express'); // ´î½¨·þÎñÆ÷
-const mongoose = require('mongoose'); // Êý¾Ý¿â²Ù×÷Ä£¿é
-const bodyParser = require('body-parser'); // postÇëÇó½âÎö
-const cookies = require('cookies'); // ÓÃÓÚ¶ÁÐ´cookies
+const swig = require('swig'); // Ã„Â£Â°Ã¥Â½Ã¢ÃŽÃ¶Ã’Ã½Ã‡Ã¦
+const express = require('express'); // Â´Ã®Â½Â¨Â·Ã¾ÃŽÃ±Ã†Ã·
+const mongoose = require('mongoose'); // ÃŠÃ½Â¾ÃÂ¿Ã¢Â²Ã™Ã—Ã·Ã„Â£Â¿Ã©
+const bodyParser = require('body-parser'); // postÃ‡Ã«Ã‡Ã³Â½Ã¢ÃŽÃ¶
+const cookies = require('cookies'); // Ã“ÃƒÃ“ÃšÂ¶ÃÃÂ´cookies
 const User = require('./models/user');
-const app = express();
+const app = express(); 
 
-// Ö»Òª¿Í»§¶Ë·¢ËÍÇëÇó¾Í»áÍ¨¹ýÕâ¸öÖÐ¼ä¼þ
+// Ã–Â»Ã’ÂªÂ¿ÃÂ»Â§Â¶Ã‹Â·Â¢Ã‹ÃÃ‡Ã«Ã‡Ã³Â¾ÃÂ»Ã¡ÃÂ¨Â¹Ã½Ã•Ã¢Â¸Ã¶Ã–ÃÂ¼Ã¤Â¼Ã¾
 app.use((req, res, next) => {
     req.cookies = new cookies(req, res);
 
     /**
-     * ½âÎöÓÃ»§µÄcookiesÐÅÏ¢
-     * ²éÑ¯Êý¾Ý¿âÅÐ¶ÏÊÇ·ñÎª¹ÜÀíÔ± isAdmin
-     * ×¢Òâ£º²éÑ¯Êý¾Ý¿âÊÇÒì²½²Ù×÷£¬nextÓ¦¸Ã·ÅÔÚ»Øµ÷Àï±ß
+     * Â½Ã¢ÃŽÃ¶Ã“ÃƒÂ»Â§ÂµÃ„cookiesÃÃ…ÃÂ¢
+     * Â²Ã©Ã‘Â¯ÃŠÃ½Â¾ÃÂ¿Ã¢Ã…ÃÂ¶ÃÃŠÃ‡Â·Ã±ÃŽÂªÂ¹ÃœÃ€Ã­Ã”Â± isAdmin
+     * Ã—Â¢Ã’Ã¢Â£ÂºÂ²Ã©Ã‘Â¯ÃŠÃ½Â¾ÃÂ¿Ã¢ÃŠÃ‡Ã’Ã¬Â²Â½Â²Ã™Ã—Ã·Â£Â¬nextÃ“Â¦Â¸ÃƒÂ·Ã…Ã”ÃšÂ»Ã˜ÂµÃ·Ã€Ã¯Â±ÃŸ
      */
     req.userInfo = {};
     if (req.cookies.get("userInfo")) {
         try {
             req.userInfo = JSON.parse(req.cookies.get("userInfo"));
-            // ²éÑ¯Êý¾Ý¿âÅÐ¶ÏÊÇ·ñÎª¹ÜÀíÔ±
+            // Â²Ã©Ã‘Â¯ÃŠÃ½Â¾ÃÂ¿Ã¢Ã…ÃÂ¶ÃÃŠÃ‡Â·Ã±ÃŽÂªÂ¹ÃœÃ€Ã­Ã”Â±
             User.findById(req.userInfo._id).then(function (result) {
                 req.userInfo.isAdmin = Boolean(result.isAdmin);
                 next();
@@ -32,35 +32,35 @@ app.use((req, res, next) => {
     }
 });
 
-// ÎªreqÌí¼ÓbodyÊôÐÔ
+// ÃŽÂªreqÃŒÃ­Â¼Ã“bodyÃŠÃ´ÃÃ”
 app.use(bodyParser.urlencoded({extended: true}));
 
-// È¡ÏûÄ£°å»º´æµÄÏÞÖÆ
+// ÃˆÂ¡ÃÃ»Ã„Â£Â°Ã¥Â»ÂºÂ´Ã¦ÂµÃ„ÃÃžÃ–Ã†
 swig.setDefaults({
     cache: false
 });
 
-// ÅäÖÃÄ£°åÒýÇæ
+// Ã…Ã¤Ã–ÃƒÃ„Â£Â°Ã¥Ã’Ã½Ã‡Ã¦
 app.set('views', './views');
 app.set('view cache', false);
 app.set('view engine', 'html');
 app.engine('html', swig.renderFile);
 
-// ÉèÖÃ¾²Ì¬ÎÄ¼þÍÐ¹Ü
+// Ã‰Ã¨Ã–ÃƒÂ¾Â²ÃŒÂ¬ÃŽÃ„Â¼Ã¾ÃÃÂ¹Ãœ
 app.use('/public', express.static(__dirname + '/public'));
 
-// »®·ÖÄ£¿é 
-app.use('/', require('./routers/main'));// Ç°Ì¨Ä£¿é
-app.use('/admin', require('./routers/admin'));// ºóÌ¨Ä£¿é
-app.use('/api', require('./routers/api'));//APIÄ£¿é
+// Â»Â®Â·Ã–Ã„Â£Â¿Ã© 
+app.use('/', require('./routers/main'));// Ã‡Â°ÃŒÂ¨Ã„Â£Â¿Ã©
+app.use('/admin', require('./routers/admin'));// ÂºÃ³ÃŒÂ¨Ã„Â£Â¿Ã©
+app.use('/api', require('./routers/api'));//APIÃ„Â£Â¿Ã©
 
-// Á¬½ÓÊý¾Ý¿â
+// ÃÂ¬Â½Ã“ÃŠÃ½Â¾ÃÂ¿Ã¢
 mongoose.connect('mongodb://localhost:27017/blog', (err) => {
     if (err) {
         console.log("database connecting error");
     } else {
         console.log("database connecting successful");
-        // Æô¶¯±¾µØ·þÎñÆ÷£¬¼àÌý¶Ë¿Ú
+        // Ã†Ã´Â¶Â¯Â±Â¾ÂµÃ˜Â·Ã¾ÃŽÃ±Ã†Ã·Â£Â¬Â¼Ã ÃŒÃ½Â¶Ã‹Â¿Ãš
         app.listen(8085, (req, res, next) => {
             console.log("app is running at port 8085");
         });
